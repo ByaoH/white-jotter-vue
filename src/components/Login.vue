@@ -59,8 +59,8 @@ export default {
   data () {
     return {
       loginForm: {
-        username: '',
-        password: '',
+        username: 'root',
+        password: '123456',
         checked: false
       },
       rules: {
@@ -82,12 +82,14 @@ export default {
         if (bool) {
           this.$axios.post('/login', this.loginForm)
             .then(resp => {
-              if (resp.data.code === 200) {
-                console.log(resp.data)
-                this.$router.replace({ path: '/index' })
-                this.$message.success(resp.data.message)
+              const data = resp.data
+              if (data.code === 200) {
+                console.log(data)
+                this.$message.success(data.message)
+                this.$store.commit('login', this.loginForm)
+                this.$router.push({ path: '/index' })
               } else {
-                this.$message.error(resp.data.message)
+                this.$message.error(data.message)
               }
             })
             .catch(e => {
@@ -99,7 +101,9 @@ export default {
     }
   },
   created () {
-    console.log(this.$route.query.redirect)
+    // const redirectParam = this.$route.query.redirect || null
+    // console.log(redirectParam)
+    console.log(this.$store.state)
   }
 }
 </script>
