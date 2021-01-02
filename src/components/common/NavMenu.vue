@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    :default-active="'/index'"
+    :default-active="this.$route.path"
     router
     mode="horizontal"
     background-color="white"
@@ -30,13 +30,13 @@
 <script>
 export default {
   name: 'NavMenu',
-  data(){
+  data () {
     return {
       navList: [
-        {name: '/index', navItem: '首页'},
-        {name: '/jotter', navItem: '笔记本'},
-        {name: '/library', navItem: '图书馆'},
-        {name: '/admin', navItem: '个人中心'}
+        { name: '/index', navItem: '首页' },
+        { name: '/jotter', navItem: '笔记本' },
+        { name: '/library', navItem: '图书馆' },
+        { name: '/admin', navItem: '个人中心' }
       ]
     }
   }
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style scoped>
-a{
+a {
   text-decoration: none;
 }
 

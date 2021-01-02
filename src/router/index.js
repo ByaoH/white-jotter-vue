@@ -7,11 +7,19 @@ const routes = [
   {
     path: '/home',
     component: () => import('@/components/Home'),
-    redirect: '/home/index',
+    redirect: '/index',
     children: [
       {
-        path: 'index',
+        path: '/index',
         component: () => import('@/components/AppIndex'),
+        meta: {
+          // 需要认证
+          requireAuth: true
+        }
+      },
+      {
+        path: '/library',
+        component: () => import('@/components/library/LibraryIndex'),
         meta: {
           // 需要认证
           requireAuth: true
