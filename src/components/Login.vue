@@ -87,7 +87,9 @@ export default {
                 console.log(data)
                 this.$message.success(data.message)
                 this.$store.commit('login', this.loginForm)
-                this.$router.push({ path: '/index' })
+                this.$router.push({
+                  path: '/home'
+                })
               } else {
                 this.$message.error(data.message)
               }

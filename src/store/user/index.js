@@ -1,16 +1,16 @@
 export default {
   namespace: true,
   state: {
-    username: localStorage.getItem('user') || ''
+    username: sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).username : ''
+    // username: ''
   },
   getters: {
-    getUser: (state) => state.user
   },
   mutations: {
     login: (state, user) => {
-      state.user = user
+      state.username = user.username
       // 存储本地
-      window.localStorage.setItem('user', JSON.stringify(user))
+      sessionStorage.setItem('user', JSON.stringify(user))
     }
   },
   actions: {

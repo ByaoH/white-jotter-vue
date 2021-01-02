@@ -5,25 +5,32 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/home',
+    component: () => import('@/components/Home'),
+    redirect: '/home/index',
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/components/AppIndex'),
+        meta: {
+          // 需要认证
+          requireAuth: true
+        }
+      }
+    ]
+  },
+  {
     path: '/',
     redirect: '/login'
   },
   {
     path: '/login',
     component: () => import('@/components/Login')
-  },
-  {
-    path: '/index',
-    component: () => import('@/components/AppIndex'),
-    meta: {
-      // 需要认证
-      requireAuth: true
-    },
-    shit: 'shit'
   }
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 router.beforeEach((to, from, next) => {
@@ -32,8 +39,7 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       next({
-        path: 'login',
-        query: { redirect: '未登陆' }
+        path: '/login'
       })
     }
   } else { next() }
